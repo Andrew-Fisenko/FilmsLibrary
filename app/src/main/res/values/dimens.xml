@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_100_dp">100dp</dimen>
+    <dimen name="margin_15_dp">15dp</dimen>
+    <dimen name="feels_like_text_size">18sp</dimen>
+    <dimen name="city_text_size">32sp</dimen>
+    <dimen name="text_size">18sp</dimen>
+    <dimen name="margin_10_dp">10dp</dimen>
+</resources>
