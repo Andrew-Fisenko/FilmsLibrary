@@ -1,17 +1,16 @@
 package com.example.filmslibrary.ui.main
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import com.example.filmslibrary.R
 import com.example.filmslibrary.model.entities.FilmCard
 import com.google.android.material.snackbar.Snackbar
 import com.example.filmslibrary.databinding.MainFragmentBinding
 import com.example.filmslibrary.model.AppState
+import com.example.filmslibrary.model.entities.Film
 import com.example.filmslibrary.ui.adapters.MainFragmentAdapter
 import com.example.filmslibrary.ui.details.DetailsFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -76,20 +75,27 @@ class MainFragment : Fragment() {
             }
             is AppState.Error -> {
                 progressBar.visibility = View.GONE
-                Snackbar
-                    .make(
-                        binding.mainFragmentRecyclerView,
-                        getString(R.string.error),
-                        Snackbar.LENGTH_INDEFINITE
-                    )
-                    .setAction(getString(R.string.reload)) { viewModel.getFilm() }
-                    .show()
+                mainFragmentRecyclerView.showSnackBar(
+                    getString(R.string.error),
+                    getString(R.string.reload)
+                ) {
+                    viewModel.getFilm()
+                }
             }
         }
     }
 
     interface OnItemViewClickListener {
         fun onItemViewClick(filmCard: FilmCard)
+    }
+
+    private fun View.showSnackBar(
+        text: String,
+        actionText: String,
+        length: Int = Snackbar.LENGTH_INDEFINITE,
+        action: (View) -> Unit
+    ) {
+        Snackbar.make(this, text, length).setAction(actionText, action).show()
     }
 
     companion object {
