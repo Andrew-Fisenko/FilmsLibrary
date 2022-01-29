@@ -12,6 +12,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_10_dp"
+        android:gravity="center"
+        android:textColor="@color/black"
         android:textSize="@dimen/city_text_size"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,49 +22,95 @@
         tools:text="Film" />
 
     <TextView
+        android:id="@+id/filmYearTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_titles"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/filmName"
+        tools:text="@string/year" />
+
+    <TextView
         android:id="@+id/filmYear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/filmYearTitle"
         app:layout_constraintTop_toBottomOf="@+id/filmName"
-        tools:text="Year"  />
+        tools:text="Year" />
 
     <TextView
         android:id="@+id/movieLength"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_15_dp"
-        tools:text="Time"
+        android:textColor="@color/black"
         android:textSize="@dimen/text_size"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/movieLengthTitle"
+        app:layout_constraintTop_toBottomOf="@+id/filmYear"
+        tools:text="Time" />
+
+
+    <TextView
+        android:id="@+id/movieLengthTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_15_dp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_titles"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/filmYear" />
+        app:layout_constraintTop_toBottomOf="@+id/filmYear"
+        tools:text="@string/movie_length" />
 
     <TextView
         android:id="@+id/ratingIMDb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_15_dp"
+        android:textColor="@color/black"
         android:textSize="@dimen/text_size"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ratingIMDbTitle"
+        app:layout_constraintTop_toBottomOf="@+id/movieLength"
+        tools:text="Rating" />
+
+    <TextView
+        android:id="@+id/ratingIMDbTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_15_dp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_titles"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/movieLength"
-        tools:text="Rating"  />
+        tools:text="@string/rating" />
+
 
     <TextView
         android:id="@+id/description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_15_dp"
-        tools:text="Description"
+        android:layout_marginLeft="@dimen/margin_5_dp"
+        android:layout_marginRight="@dimen/margin_5_dp"
+        android:padding="@dimen/margin_15_dp"
+        android:textColor="@color/black"
         android:textSize="@dimen/text_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ratingIMDb" />
-
+        app:layout_constraintTop_toBottomOf="@+id/ratingIMDb"
+        tools:text="Description" />
 
 
     <ProgressBar
@@ -79,9 +127,6 @@
     <androidx.constraintlayout.widget.Group
         android:id="@+id/weatherGroup"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-<!--        android:visibility="invisible"-->
-<!--        tools:visibility="visible"-->
-<!--        app:constraint_referenced_ids="filmName,movieLength,ratingIMDb,description,filmYear,feelsLikeValue" />-->
+        android:layout_height="wrap_content" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
