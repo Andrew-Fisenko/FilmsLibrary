@@ -6,4 +6,8 @@
     <dimen name="city_text_size">32sp</dimen>
     <dimen name="text_size">18sp</dimen>
     <dimen name="margin_10_dp">10dp</dimen>
+    <dimen name="recycler_item_padding">10dp</dimen>
+    <dimen name="recycler_item_text_size">25sp</dimen>
+    <dimen name="recycler_item_line_height">1dp</dimen>
+    <dimen name="recycler_item_line_margin_end">20dp</dimen>
 </resources>

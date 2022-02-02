@@ -12,29 +12,36 @@ import com.example.filmslibrary.model.entities.FilmCard
 import com.google.android.material.snackbar.Snackbar
 import com.example.filmslibrary.databinding.MainFragmentBinding
 import com.example.filmslibrary.model.AppState
+import com.example.filmslibrary.ui.adapters.MainFragmentAdapter
+import com.example.filmslibrary.ui.details.DetailsFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainFragment : Fragment() {
 
     private val viewModel: MainViewModel by viewModel()
+
     private var _binding: MainFragmentBinding? = null
     private val binding get() = _binding!!
 
+    private var adapter: MainFragmentAdapter? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View {
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         _binding = MainFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val observer = Observer<AppState>{ renderData(it)}
-        viewModel.getLiveData().observe(viewLifecycleOwner, observer)
-        viewModel.getFilm()
-
+        with(binding) {
+            mainFragmentRecyclerView.adapter = adapter
+            viewModel.getLiveData().observe(viewLifecycleOwner, { renderData(it) })
+            viewModel.getFilm()
+        }
     }
 
     override fun onDestroyView() {
@@ -42,42 +49,53 @@ class MainFragment : Fragment() {
         _binding = null
     }
 
-    private fun renderData(appState: AppState) = with(binding){
-        when (appState){
+    private fun renderData(appState: AppState) = with(binding) {
+        when (appState) {
             is AppState.Success -> {
-                val filmData = appState.filmData
                 progressBar.visibility = View.GONE
-                weatherGroup.visibility = View.VISIBLE
-                setData(filmData)
-
+                adapter = MainFragmentAdapter(object : OnItemViewClickListener {
+                    override fun onItemViewClick(filmData: FilmCard) {
+                        val manager = activity?.supportFragmentManager
+                        manager?.let { manager ->
+                            val bundle = Bundle().apply {
+                                putParcelable(DetailsFragment.BUNDLE_EXTRA, filmData)
+                            }
+                            manager.beginTransaction()
+                                .add(R.id.container, DetailsFragment.newInstance(bundle))
+                                .addToBackStack("")
+                                .commitAllowingStateLoss()
+                        }
+                    }
+                }).apply {
+                    setFilm(appState.filmData)
+                }
+                mainFragmentRecyclerView.adapter = adapter
             }
             is AppState.Loading -> {
-                weatherGroup.visibility = View.INVISIBLE
                 progressBar.visibility = View.VISIBLE
             }
             is AppState.Error -> {
                 progressBar.visibility = View.GONE
-                weatherGroup.visibility = View.INVISIBLE
                 Snackbar
-                    .make(mainView, "Error", Snackbar.LENGTH_INDEFINITE)
-                    .setAction("Reload") {viewModel.getFilm()}
+                    .make(
+                        binding.mainFragmentRecyclerView,
+                        getString(R.string.error),
+                        Snackbar.LENGTH_INDEFINITE
+                    )
+                    .setAction(getString(R.string.reload)) { viewModel.getFilm() }
                     .show()
-
             }
         }
     }
 
-    private fun setData(filmData: FilmCard) = with(binding) {
-        filmName.text = filmData.film.filmName
-        filmYear.text = filmData.film.year.toString()
-        movieLength.text = filmData.film.movieLength.toString()
-        ratingIMDb.text = filmData.film.ratingIMDb.toString()
-        description.text = filmData.film.description
-
-
+    interface OnItemViewClickListener {
+        fun onItemViewClick(filmCard: FilmCard)
     }
 
     companion object {
         fun newInstance() = MainFragment()
     }
 }
+
+
+
