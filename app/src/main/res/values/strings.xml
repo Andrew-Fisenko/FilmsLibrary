@@ -2,4 +2,7 @@
     <string name="app_name">FilmsLibrary</string>
     <string name="error">Error!!!</string>
     <string name="reload">Reload</string>
+    <string name="year">Год</string>
+    <string name="movie_length">Время</string>
+    <string name="rating">IMDb</string>
 </resources>

@@ -76,20 +76,29 @@ class MainFragment : Fragment() {
             }
             is AppState.Error -> {
                 progressBar.visibility = View.GONE
-                Snackbar
-                    .make(
-                        binding.mainFragmentRecyclerView,
-                        getString(R.string.error),
-                        Snackbar.LENGTH_INDEFINITE
-                    )
-                    .setAction(getString(R.string.reload)) { viewModel.getFilm() }
-                    .show()
+                mainFragmentRecyclerView.showSnackBar(
+                    getString(R.string.error),
+                    getString(R.string.reload)
+                ) {
+                    viewModel.getFilm()
+                }
+
+
             }
         }
     }
 
     interface OnItemViewClickListener {
         fun onItemViewClick(filmCard: FilmCard)
+    }
+
+    private fun View.showSnackBar(
+        text: String,
+        actionText: String,
+        length: Int = Snackbar.LENGTH_INDEFINITE,
+        action: (View) -> Unit
+    ) {
+        Snackbar.make(this, text, length).setAction(actionText, action).show()
     }
 
     companion object {

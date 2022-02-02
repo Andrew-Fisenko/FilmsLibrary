@@ -10,14 +10,14 @@ import com.example.filmslibrary.model.entities.FilmCard
 import com.example.filmslibrary.ui.main.MainFragment
 
 
-class MainFragmentAdapter(private val itemClickListener: MainFragment.OnItemViewClickListener)
-    : RecyclerView.Adapter<MainFragmentAdapter.MainViewHolder>() {
-    private var weatherData: List<FilmCard> = listOf()
+class MainFragmentAdapter(private val itemClickListener: MainFragment.OnItemViewClickListener) :
+    RecyclerView.Adapter<MainFragmentAdapter.MainViewHolder>() {
+    private var filmData: List<FilmCard> = listOf()
     private lateinit var binding: FragmentMainRecyclerItemBinding
 
     @SuppressLint("NotifyDataSetChanged")
     fun setFilm(data: List<FilmCard>) {
-        weatherData = data
+        filmData = data
         notifyDataSetChanged()
     }
 
@@ -29,10 +29,10 @@ class MainFragmentAdapter(private val itemClickListener: MainFragment.OnItemView
     }
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
-        holder.bind(weatherData[position])
+        holder.bind(filmData[position])
     }
 
-    override fun getItemCount() = weatherData.size
+    override fun getItemCount() = filmData.size
 
     inner class MainViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(filmCard: FilmCard) = with(binding) {
