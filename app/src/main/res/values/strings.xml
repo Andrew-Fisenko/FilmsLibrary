@@ -5,4 +5,7 @@
     <string name="year">Год</string>
     <string name="movie_length">ID</string>
     <string name="rating">IMDb</string>
+    <string name="options">OPT</string>
+    <string name="calculate">Start</string>
+    <string name="service_working">The service is working</string>
 </resources>

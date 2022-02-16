@@ -12,7 +12,7 @@ import com.example.filmslibrary.databinding.MainFragmentBinding
 import com.example.filmslibrary.model.AppState
 import com.example.filmslibrary.model.entities.Film
 import com.example.filmslibrary.ui.adapters.MainFragmentAdapter
-import com.example.filmslibrary.ui.details.DetailsFragment
+//import com.example.filmslibrary.ui.details.DetailsFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainFragment : Fragment() {
