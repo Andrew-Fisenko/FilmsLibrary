@@ -12,37 +12,37 @@ import java.util.stream.Collectors
 import javax.net.ssl.HttpsURLConnection
 
 object FilmLoader {
-//    fun loadFilm(idKinopoisk: Int): FilmDTO? {
-//        try {
-//            val uri =
-//                URL("https://cloud-api.kinopoisk.dev/movies/${idKinopoisk}/token/ae3250a07bde56abbe919ed8b9babbaf")
-//
-//            lateinit var urlConnection: HttpsURLConnection
-//            try {
-//                urlConnection = uri.openConnection() as HttpsURLConnection
-//                urlConnection.requestMethod = "GET"
-////                urlConnection.addRequestProperty(
-////                    "Key", "Value"
-////                )
-//                urlConnection.readTimeout = 10000
-//                val bufferedReader = BufferedReader(InputStreamReader(urlConnection.inputStream))
-//                val lines = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
-//                    getLinesForOld(bufferedReader)
-//                } else {
-//                    getLines(bufferedReader)
-//                }
-//
-//                return Gson().fromJson(lines, FilmDTO::class.java)
-//            } catch (e: Exception) {
-//                e.printStackTrace()
-//            } finally {
-//                urlConnection.disconnect()
-//            }
-//        } catch (e: MalformedURLException) {
-//            e.printStackTrace()
-//        }
-//        return null
-//    }
+    fun loadFilm(idKinopoisk: Int): FilmDTO? {
+        try {
+            val uri =
+                URL("https://cloud-api.kinopoisk.dev/movies/${idKinopoisk}/token/ae3250a07bde56abbe919ed8b9babbaf")
+
+            lateinit var urlConnection: HttpsURLConnection
+            try {
+                urlConnection = uri.openConnection() as HttpsURLConnection
+                urlConnection.requestMethod = "GET"
+//                urlConnection.addRequestProperty(
+//                    "Key", "Value"
+//                )
+                urlConnection.readTimeout = 10000
+                val bufferedReader = BufferedReader(InputStreamReader(urlConnection.inputStream))
+                val lines = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+                    getLinesForOld(bufferedReader)
+                } else {
+                    getLines(bufferedReader)
+                }
+
+                return Gson().fromJson(lines, FilmDTO::class.java)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            } finally {
+                urlConnection.disconnect()
+            }
+        } catch (e: MalformedURLException) {
+            e.printStackTrace()
+        }
+        return null
+    }
 
     private fun getLinesForOld(reader: BufferedReader): String {
         val rawData = StringBuilder(1024)

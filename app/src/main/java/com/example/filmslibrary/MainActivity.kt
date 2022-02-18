@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
                 .commitNow()
         }
 
-        registerReceiver(receiver , IntentFilter("android.net.conn.CONNECTIVITY_CHANGE"))
+        registerReceiver(receiver, IntentFilter("android.net.conn.CONNECTIVITY_CHANGE"))
 
     }
 

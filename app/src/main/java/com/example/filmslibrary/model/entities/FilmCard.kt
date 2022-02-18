@@ -3,6 +3,8 @@ package com.example.filmslibrary.model.entities
 import android.os.Parcelable
 import com.example.filmslibrary.model.entities.Film
 import kotlinx.parcelize.Parcelize
+import retrofit2.http.Url
+import java.net.URL
 
 @Parcelize
 data class FilmCard(
@@ -11,15 +13,16 @@ data class FilmCard(
     val year: Int,
     val ratingIMDb: Double,
     val description: String,
+    val poster: String
 
-    ) : Parcelable
+) : Parcelable
 
 fun getDefaultFilm() = Film("Матрица", 301)
 
 fun getFilms() = listOf(
-    FilmCard(Film("Челюсти", 396), 1900, 0.0, " "),
-    FilmCard(Film("Матрица", 301), 1900, 0.0, " "),
-    FilmCard(Film("Джентельмены", 1143242), 1900, 0.0, " "),
-    FilmCard(Film("Человек-паук ", 838), 1900, 0.0, " "),
-    FilmCard(Film("Крик", 1807), 1900, 0.0, " "),
+    FilmCard(Film("Челюсти", 396), 1900, 0.0, " ", ""),
+    FilmCard(Film("Матрица", 301), 1900, 0.0, " ", ""),
+    FilmCard(Film("Джентельмены", 1143242), 1900, 0.0, " ", ""),
+    FilmCard(Film("Человек-паук ", 838), 1900, 0.0, " ", ""),
+    FilmCard(Film("Крик", 1807), 1900, 0.0, " ", ""),
 )

@@ -18,18 +18,10 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
 
     private fun getDataFromLocalSource() {
         liveData.value = AppState.Loading
-        val x: Int = (Math.random() * 2).toInt()
-        if (x == 0) {
-            Thread {
-                sleep(1000)
-                liveData.postValue(AppState.Success(repository.getFilmFromLocalStorage()))
-            }.start()
-        } else if (x == 1) {
-            Thread {
-                sleep(1000)
-                liveData.postValue(AppState.Error(Exception()))
-            }.start()
-        }
+        Thread {
+            sleep(1000)
+            liveData.postValue(AppState.Success(repository.getFilmFromLocalStorage()))
+        }.start()
     }
 
     override fun onCleared() {
